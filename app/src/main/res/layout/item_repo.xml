@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical">
+        <TextView
+                android:id="@+id/tvRepoName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                tools:text="hello"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        <TextView
+                android:id="@+id/tvRepoDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="hello"/>
+
+        <TextView
+                android:id="@+id/tvRepoStar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/ic_star_black_24dp"
+                android:text="0"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvContributorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/nav_main" app:startDestination="@id/chooserFragment">
+
+    <fragment android:id="@+id/chooserFragment"
+              android:name="com.github.judrummer.concurrencymadeeasy.presentation.chooser.ChooserFragment"
+              android:label="ChooserFragment">
+        <action android:id="@+id/action_chooserFragment_to_coroutineFragment" app:destination="@id/coroutineFragment"/>
+    </fragment>
+    <fragment android:id="@+id/coroutineFragment"
+              android:name="com.github.judrummer.concurrencymadeeasy.presentation.coroutine.CoroutineFragment"
+              android:label="CoroutineFragment"/>
+</navigation>
