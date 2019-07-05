@@ -1,16 +1,9 @@
 package com.github.judrummer.concurrencymadeeasy.data
 
 import com.google.gson.annotations.SerializedName
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
-
-data class SearchReposApiResponseEntity(
-    @SerializedName("total_count") val totalCount: Int,
-    @SerializedName("incomplete_results") val incompleteResults: Boolean,
-    @SerializedName("items") val items: List<RepoEntity>
-)
 
 data class RepoEntity(
     @SerializedName("id") val id: String = "",
@@ -32,34 +25,43 @@ data class OwnerEntity(
 
 data class ContributorEntity(
     @SerializedName("login") val login: String = "",
-    @SerializedName("contributions") val contributions: Int =0,
+    @SerializedName("contributions") val contributions: Int = 0,
     @SerializedName("avatar_url") val avatarUrl: String = ""
 )
 
-interface RepoApi {
-    @GET("search/repositories")
-    fun rxSearchRepos(
-        @Query("q") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
-    ): Observable<SearchReposApiResponseEntity>
+data class UserEntity(
+    @SerializedName("id") val id: String = "",
+    @SerializedName("login") val login: String = "",
+    @SerializedName("name") val name: String = "",
+    @SerializedName("avatar_url") val avatarUrl: String = ""
+)
+
+interface GithubApi {
+    @GET("users/{username}/repos")
+    suspend fun rxGetUserRepos(
+        @Path("username") username: String
+    ): Single<List<RepoEntity>>
 
     @GET("repos/{owner}/{name}/contributors")
     fun rxGetContributors(
         @Path("owner") owner: String,
         @Path("name") name: String
-    ): Observable<List<ContributorEntity>>
+    ): Single<List<ContributorEntity>>
 
-    @GET("search/repositories")
-    suspend fun searchRepos(
-        @Query("q") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
-    ): SearchReposApiResponseEntity
 
     @GET("repos/{owner}/{name}/contributors")
     suspend fun getContributors(
         @Path("owner") owner: String,
         @Path("name") name: String
     ): List<ContributorEntity>
+
+    @GET("users/{username}")
+    suspend fun getUser(
+        @Path("username") username: String
+    ): UserEntity
+
+    @GET("users/{username}/repos")
+    suspend fun getUserRepos(
+        @Path("username") username: String
+    ): List<RepoEntity>
 }

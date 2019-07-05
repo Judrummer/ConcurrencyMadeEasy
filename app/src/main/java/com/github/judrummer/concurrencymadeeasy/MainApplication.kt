@@ -1,9 +1,12 @@
 package com.github.judrummer.concurrencymadeeasy
 
 import android.app.Application
-import com.github.judrummer.concurrencymadeeasy.data.RepoApi
+import android.content.Context
+import androidx.work.CoroutineWorker
+import androidx.work.WorkerParameters
+import com.github.judrummer.concurrencymadeeasy.data.GithubApi
 import com.github.judrummer.concurrencymadeeasy.domain.GetRepoItemsUsecase
-import com.github.judrummer.concurrencymadeeasy.presentation.coroutine.CoroutineViewModel
+import com.github.judrummer.concurrencymadeeasy.presentation.user.UserViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.Kodein
@@ -40,10 +43,20 @@ class MainApplication : Application(), KodeinAware {
             }.build()
         }
 
-        bind<RepoApi>() with provider { instance<Retrofit>().create(RepoApi::class.java) }
+        bind<GithubApi>() with provider { instance<Retrofit>().create(GithubApi::class.java) }
         bind() from provider { GetRepoItemsUsecase(instance()) }
         //Presentation
-        bind() from provider { CoroutineViewModel(instance()) }
+        bind() from provider { UserViewModel(instance(), instance()) }
 
+    }
+}
+
+
+class ExampleWorker(
+    appContext: Context,
+    workerParams: WorkerParameters
+) : CoroutineWorker(appContext, workerParams) {
+    override suspend fun doWork(): Result {
+        return Result.success()
     }
 }

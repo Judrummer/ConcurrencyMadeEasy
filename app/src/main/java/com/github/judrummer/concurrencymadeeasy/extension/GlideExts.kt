@@ -6,6 +6,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.github.judrummer.concurrencymadeeasy.R
 
+fun ImageView.load(url: String, @DrawableRes placeholderRes: Int = R.drawable.ic_person_black_24dp) {
+    Glide.with(this)
+        .load(url)
+        .apply(RequestOptions.placeholderOf(placeholderRes))
+        .into(this)
+}
+
+
 fun ImageView.loadCircular(url: String, @DrawableRes placeholderRes: Int = R.drawable.ic_person_black_24dp) {
     Glide.with(this)
         .load(url)

@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_main" app:startDestination="@id/chooserFragment">
+            android:id="@+id/nav_main" app:startDestination="@id/loginFragment">
 
-    <fragment android:id="@+id/chooserFragment"
-              android:name="com.github.judrummer.concurrencymadeeasy.presentation.chooser.ChooserFragment"
-              android:label="ChooserFragment">
-        <action android:id="@+id/action_chooserFragment_to_coroutineFragment" app:destination="@id/coroutineFragment"/>
+    <fragment android:id="@+id/loginFragment" android:name="com.github.judrummer.concurrencymadeeasy.presentation.login.LoginFragment"
+              android:label="LoginFragment">
+        <action
+                android:id="@+id/action_loginFragment_to_userFragment"
+                app:destination="@id/userFragment"/>
     </fragment>
-    <fragment android:id="@+id/coroutineFragment"
-              android:name="com.github.judrummer.concurrencymadeeasy.presentation.coroutine.CoroutineFragment"
-              android:label="CoroutineFragment"/>
+    <fragment
+            android:id="@+id/userFragment"
+            android:name="com.github.judrummer.concurrencymadeeasy.presentation.user.UserFragment"
+            android:label="UserFragment">
+        <argument
+                android:name="username"
+                app:argType="string"/>
+    </fragment>
 </navigation>

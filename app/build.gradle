@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 28
@@ -41,11 +42,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01"
     testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
 
     def coroutines_version = "1.2.1"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutines_version"
+
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "io.mockk:mockk:1.9"
 
@@ -55,7 +59,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     def work_version = "2.1.0-alpha01"
-    implementation "androidx.work:work-runtime-ktx:$work_version"
+        implementation "androidx.work:work-runtime-ktx:$work_version"
 
     implementation "io.reactivex.rxjava2:rxjava:2.2.6"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -74,7 +78,7 @@ dependencies {
     implementation "org.kodein.di:kodein-di-framework-android-core:$kodein_version"
     implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_version"
 
-    def android_navigation_version = "2.1.0-alpha05"
+    def android_navigation_version = "2.1.0-alpha06"
     implementation "androidx.navigation:navigation-common-ktx:$android_navigation_version"
     implementation "androidx.navigation:navigation-fragment-ktx:$android_navigation_version"
     implementation "androidx.navigation:navigation-runtime-ktx:$android_navigation_version"
